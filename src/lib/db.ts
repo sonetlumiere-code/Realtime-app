@@ -1,3 +1,10 @@
+import { Redis } from '@upstash/redis'
+
+export const db = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL || '',
+  token: process.env.UPSTASH_REDIS_REST_TOKEN || ''
+})
+
 // import { connect, connection } from 'mongoose'
 
 // export async function dbConnect() {
@@ -15,10 +22,3 @@
 // connection.on('error', (err) => {
 //   console.log(err)
 // })
-
-import { Redis } from '@upstash/redis'
-
-export const db = new Redis({
-  url: process.env.UPSTASH_REDIST_REST_URL || '',
-  token: process.env.UPSTASH_REDIST_REST_TOKEN || ''
-})
