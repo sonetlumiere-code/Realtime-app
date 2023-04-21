@@ -1,11 +1,15 @@
-import { FC } from 'react'
+// import { FC } from 'react'
 import Button from '@/components/ui/Button'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-interface pageProps {}
+// interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page = async ({}) => {
+  const session = await getServerSession(authOptions)
+
   return (
-    <Button>hello</Button>
+    <pre>{JSON.stringify(session)}</pre>
   )
 }
 
