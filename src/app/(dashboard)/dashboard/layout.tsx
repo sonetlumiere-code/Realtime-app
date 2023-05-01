@@ -2,7 +2,7 @@ import FriendRequestSidebarOptions from '@/components/FriendRequestSidebarOption
 import { Icon, Icons } from '@/components/Icons';
 import SidebarChatList from '@/components/SidebarChatList';
 import SignOutButton from '@/components/SignOutButton';
-import { getFriendsByUserId } from '@/helpers/get-friends-by-user-ids';
+import { getFriendsByUserId } from '@/helpers/get-friends-by-user-id';
 import { fetchRedis } from '@/helpers/redis';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
