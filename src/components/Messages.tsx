@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import { pusherClient } from '@/lib/pusher'
-import { cn, toPusherKey } from '@/lib/utils'
-import { Message } from '@/lib/validations/message'
-import { format } from 'date-fns'
-import Image from 'next/image'
-import { FC, useEffect, useRef, useState } from 'react'
+import { pusherClient } from '@/lib/pusher';
+import { cn, toPusherKey } from '@/lib/utils';
+import { Message } from '@/lib/validations/message';
+import { format } from 'date-fns';
+import Image from 'next/image';
+import { FC, useEffect, useRef, useState } from 'react';
 
 interface MessagesProps {
   initialMessages: Message[],
@@ -22,39 +22,39 @@ const Messages: FC<MessagesProps> = ({
   chatPartner,
   sessionImg,
 }) => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages)
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
 
   useEffect(() => {
     pusherClient.subscribe(
       toPusherKey(`chat:${chatId}`)
-    )
+    );
 
     const messageHandler = (message: Message) => {
-      setMessages((prev) => [message, ...prev])
-    }
+      setMessages((prev) => [message, ...prev]);
+    };
 
-    pusherClient.bind('incoming-message', messageHandler)
+    pusherClient.bind('incoming-message', messageHandler);
 
     return () => {
       pusherClient.unsubscribe(
         toPusherKey(`chat:${chatId}`)
-      )
-      pusherClient.unbind('incoming-message', messageHandler)
-    }
-  }, [chatId])
+      );
+      pusherClient.unbind('incoming-message', messageHandler);
+    };
+  }, [chatId]);
 
-  const scrollDownRef = useRef<HTMLDivElement | null>(null)
+  const scrollDownRef = useRef<HTMLDivElement | null>(null);
 
   const formatTimestamp = (timestamp: number) => {
-    return format(timestamp, 'HH:mm')
-  }
+    return format(timestamp, 'HH:mm');
+  };
 
   return (
     <div id='messages' className='flex h-full flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch'>
       <div ref={scrollDownRef}></div>
       {messages.map((message, index) => {
-        const isCurrentUser = message.senderId === sessionId
-        const hasNextMessageFromSameUser = messages[index - 1]?.senderId === messages[index].senderId
+        const isCurrentUser = message.senderId === sessionId;
+        const hasNextMessageFromSameUser = messages[index - 1]?.senderId === messages[index].senderId;
 
         return (
           <div
@@ -96,10 +96,10 @@ const Messages: FC<MessagesProps> = ({
               </div>
             </div>
           </div>
-        ) 
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Messages
+export default Messages;

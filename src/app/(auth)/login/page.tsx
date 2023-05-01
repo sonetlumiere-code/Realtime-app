@@ -1,22 +1,22 @@
-'use client'
+'use client';
 
-import Button from '@/components/ui/Button' 
-import { FC, useState } from 'react'
-import { signIn } from 'next-auth/react'
-import { toast } from 'react-hot-toast'
+import Button from '@/components/ui/Button';
+import { FC, useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 
 const Page: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function loginWithGoogle() {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      console.log('asdasd')
-      await signIn('google')
+      console.log('asdasd');
+      await signIn('google');
     } catch (error) {
-      toast.error('Something went wrong with your login.')
+      toast.error('Something went wrong with your login.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
@@ -70,7 +70,7 @@ const Page: FC = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
